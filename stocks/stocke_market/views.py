@@ -39,16 +39,8 @@ def add_stock(request):
         return render(request, 'add_stock.html', {'ticker':ticker})
 
 
-# def add_stock(request):
-#     if request.method == 'POST':
-#         # ticker = request.POST['ticker']
-#         form = StockForm(request.POST or None)
-#
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, ("Stock has been Added!"))
-#             return redirect('add_stock.html')
-#
-#         else:
-#             ticker = Stock.objects.all()
-#             return render(request, 'add_stock.html', {'ticker':ticker})
+def delete(request, stock_id):
+    item = Stock.objects.get(pk=stock_id)
+    item.delete()
+    messages.success(request, ("Stock has been Deleted!"))
+    return redirect(add_stock)
